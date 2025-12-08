@@ -24,6 +24,7 @@ anyio==4.12.0 \
     #   mcp
     #   sse-starlette
     #   starlette
+    #   watchfiles
 attrs==25.4.0 \
     --hash=sha256:16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11 \
     --hash=sha256:adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373
@@ -111,6 +112,7 @@ colorama==0.4.6 ; sys_platform == 'win32' \
     # via
     #   click
     #   pytest
+    #   uvicorn
 contourpy==1.3.3 \
     --hash=sha256:023b44101dfe49d7d53932be418477dba359649246075c996866106da069af69 \
     --hash=sha256:07ce5ed73ecdc4a03ffe3e1b3e3c1166db35ae7584be76f65dbbe28a7791b0cc \
@@ -200,12 +202,13 @@ docstring-parser==0.17.0 \
     --hash=sha256:583de4a309722b3315439bb31d64ba3eebada841f2e2cee23b99df001434c912 \
     --hash=sha256:cf2569abd23dce8099b300f9b4fa8191e9582dda731fd533daf54c4551658708
     # via google-cloud-aiplatform
-fastapi==0.118.3 \
-    --hash=sha256:5bf36d9bb0cd999e1aefcad74985a6d6a1fc3a35423d497f9e1317734633411d \
-    --hash=sha256:8b9673dc083b4b9d3d295d49ba1c0a2abbfb293d34ba210fd9b0a90d5f39981e
+fastapi==0.115.14 \
+    --hash=sha256:6c0c8bf9420bd58f565e585036d971872472b4f7d3f6c73b698e10cffdefb3ca \
+    --hash=sha256:b1de15cdc1c499a4da47914db35d0e4ef8f1ce62b624e94e0e5824421df99739
     # via
     #   google-adk
     #   mlflow-skinny
+    #   multi-agent-ai-system
 fastjsonschema==2.21.2 \
     --hash=sha256:1c797122d0a86c5cace2e54bf4e819c36223b552017172f32c5c024a6b77e463 \
     --hash=sha256:b1eb43748041c880796cd077f1a07c3d94e93ae84bba5ed36800a33554ae05de
@@ -501,6 +504,16 @@ httplib2==0.31.0 \
     # via
     #   google-api-python-client
     #   google-auth-httplib2
+httptools==0.7.1 \
+    --hash=sha256:2c15f37ef679ab9ecc06bfc4e6e8628c32a8e4b305459de7cf6785acd57e4d03 \
+    --hash=sha256:38e0c83a2ea9746ebbd643bdfb521b9aa4a91703e2cd705c20443405d2fd16a5 \
+    --hash=sha256:3e14f530fefa7499334a79b0cf7e7cd2992870eb893526fb097d51b4f2d0f321 \
+    --hash=sha256:7fe6e96090df46b36ccfaf746f03034e5ab723162bc51b0a4cf58305324036f2 \
+    --hash=sha256:abd72556974f8e7c74a259655924a717a2365b236c882c3f6f8a45fe94703ac9 \
+    --hash=sha256:e99c7b90a29fd82fea9ef57943d501a16f3404d7b9ee81799d41639bdaae412c \
+    --hash=sha256:f25bbaf1235e27704f1a7b86cd3304eabc04f569c828101d94a0e605ef7205a5 \
+    --hash=sha256:f72fdbae2dbc6e68b8239defb48e6a5937b12218e6ffc2c7846cc37befa84362
+    # via uvicorn
 httpx==0.28.1 \
     --hash=sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc \
     --hash=sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad
@@ -954,6 +967,7 @@ python-dotenv==1.2.1 \
     #   mlflow-skinny
     #   pydantic-settings
     #   pytest-dotenv
+    #   uvicorn
 python-multipart==0.0.20 \
     --hash=sha256:8a62d3a8335e06589fe01f2a3e178cdcc632f3fbe0d492ad9ee0ec35aab1f104 \
     --hash=sha256:8dd0cab45b8e23064ae09147625994d090fa46f5b0d1e13af944c331a7fa9d13
@@ -985,6 +999,7 @@ pyyaml==6.0.3 \
     #   google-adk
     #   mlflow-skinny
     #   pre-commit
+    #   uvicorn
 referencing==0.37.0 \
     --hash=sha256:381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231 \
     --hash=sha256:44aefc3142c5b842538163acb373e24cce6632bd54bdb01b21ad5863489f50d8
@@ -1125,9 +1140,9 @@ sse-starlette==3.0.3 \
     --hash=sha256:88cfb08747e16200ea990c8ca876b03910a23b547ab3bd764c0d8eb81019b971 \
     --hash=sha256:af5bf5a6f3933df1d9c7f8539633dc8444ca6a97ab2e2a7cd3b6e431ac03a431
     # via mcp
-starlette==0.48.0 \
-    --hash=sha256:0764ca97b097582558ecb498132ed0c7d942f233f365b86ba37770e026510659 \
-    --hash=sha256:7e8cee469a8ab2352911528110ce9088fdc6a37d9876926e73da7ce4aa4c7a46
+starlette==0.46.2 \
+    --hash=sha256:595633ce89f8ffa71a015caed34a5b2dc1c0cdb3f0f1fbd1e69339cf2abeec35 \
+    --hash=sha256:7f7361f34eed179294600af672f565727419830b54b7b084efe44bb82d2fccd5
     # via
     #   fastapi
     #   google-adk
@@ -1174,7 +1189,6 @@ typing-extensions==4.15.0 \
     #   pytest-asyncio
     #   referencing
     #   sqlalchemy
-    #   starlette
     #   typing-inspection
 typing-inspection==0.4.2 \
     --hash=sha256:4ed1cacbdc298c220f1bd249ed5287caa16f34d44ef4e9c3d0cbad5b521545e7 \
@@ -1210,6 +1224,16 @@ uvicorn==0.38.0 \
     #   google-adk
     #   mcp
     #   mlflow-skinny
+    #   multi-agent-ai-system
+uvloop==0.22.1 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32' \
+    --hash=sha256:512fec6815e2dd45161054592441ef76c830eddaad55c8aa30952e6fe1ed07c0 \
+    --hash=sha256:51eb9bd88391483410daad430813d982010f9c9c89512321f5b60e2cddbdddd6 \
+    --hash=sha256:6c84bae345b9147082b17371e3dd5d42775bddce91f885499017f4607fdaf39f \
+    --hash=sha256:700e674a166ca5778255e0e1dc4e9d79ab2acc57b9171b79e65feba7184b3370 \
+    --hash=sha256:7b5b1ac819a3f946d3b2ee07f09149578ae76066d70b44df3fa990add49a82e4 \
+    --hash=sha256:e047cc068570bac9866237739607d1313b9253c3051ad84738cbb095be0537b2 \
+    --hash=sha256:fe94b4564e865d968414598eea1a6de60adba0c040ba4ed05ac1300de402cd42
+    # via uvicorn
 virtualenv==20.35.4 \
     --hash=sha256:643d3914d73d3eeb0c552cbb12d7e82adf0e504dbf86a3182f8771a153a1971c \
     --hash=sha256:c21c9cede36c9753eeade68ba7d523529f228a403463376cf821eaae2b650f1b
@@ -1234,6 +1258,22 @@ watchdog==6.0.0 \
     --hash=sha256:cbafb470cf848d93b5d013e2ecb245d4aa1c8fd0504e863ccefa32445359d680 \
     --hash=sha256:e3df4cbb9a450c6d49318f6d14f4bbc80d763fa587ba46ec86f99f9e6876bb26
     # via google-adk
+watchfiles==1.1.1 \
+    --hash=sha256:1db5d7ae38ff20153d542460752ff397fcf5c96090c1230803713cf3147a6803 \
+    --hash=sha256:28475ddbde92df1874b6c5c8aaeb24ad5be47a11f87cde5a28ef3835932e3e94 \
+    --hash=sha256:2edc3553362b1c38d9f06242416a5d8e9fe235c204a4072e988ce2e5bb1f69f6 \
+    --hash=sha256:30f7da3fb3f2844259cba4720c3fc7138eb0f7b659c38f3bfa65084c7fc7abce \
+    --hash=sha256:36193ed342f5b9842edd3532729a2ad55c4160ffcfa3700e0d54be496b70dd43 \
+    --hash=sha256:8526e8f916bb5b9a0a777c8317c23ce65de259422bba5b31325a6fa6029d33af \
+    --hash=sha256:859e43a1951717cc8de7f4c77674a6d389b106361585951d9e69572823f311d9 \
+    --hash=sha256:8c89f9f2f740a6b7dcc753140dd5e1ab9215966f7a3530d0c0705c83b401bd7d \
+    --hash=sha256:91d4c9a823a8c987cce8fa2690923b069966dabb196dd8d137ea2cede885fde9 \
+    --hash=sha256:a173cb5c16c4f40ab19cecf48a534c409f7ea983ab8fed0741304a1c0a31b3f2 \
+    --hash=sha256:a625815d4a2bdca61953dbba5a39d60164451ef34c88d751f6c368c3ea73d404 \
+    --hash=sha256:bd404be08018c37350f0d6e34676bd1e2889990117a2b90070b3007f172d0610 \
+    --hash=sha256:dcc5c24523771db3a294c77d94771abcfcb82a0e0ee8efd910c37c59ec1b31bb \
+    --hash=sha256:f8979280bdafff686ba5e4d8f97840f929a87ed9cdf133cbbd42f7766774d2aa
+    # via uvicorn
 websockets==15.0.1 \
     --hash=sha256:0701bc3cfcb9164d04a14b149fd74be7347a530ad3bbf15ab2c678a2cd3dd9a2 \
     --hash=sha256:0af68c55afbd5f07986df82831c7bff04846928ea8d1fd7f30052638788bc9b5 \
@@ -1251,6 +1291,7 @@ websockets==15.0.1 \
     # via
     #   google-adk
     #   google-genai
+    #   uvicorn
 werkzeug==3.1.4 \
     --hash=sha256:2ad50fb9ed09cc3af22c54698351027ace879a0b60a3b5edf5730b2f7d876905 \
     --hash=sha256:cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e

@@ -3,44 +3,38 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
-import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Sequence
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
 
 from config import Settings
 from pipeline import PodcastAgentPipeline
 
 logger = logging.getLogger(__name__)
 
+# FastAPI application
+app = FastAPI(title="Podcast Multi-Agent Pipeline API")
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the podcast multi-agent pipeline.")
-    parser.add_argument(
-        "--dataset",
-        type=str,
-        default="data/ep002_ai_healthcare.json",
-        help="Path to the podcast transcript JSON file.",
-    )
-    parser.add_argument(
-        "--env-file",
-        type=str,
-        default=None,
-        help="Optional path to a .env file with model credentials.",
-    )
-    parser.add_argument(
-        "--log-level",
-        type=str,
-        default=os.getenv("LOG_LEVEL", "INFO"),
-        help="Logging level (defaults to LOG_LEVEL env or INFO).",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        default=None,
-        help="Optional file path to persist the pipeline response.",
-    )
-    return parser.parse_args()
+
+class PipelineRequest(BaseModel):
+    """Request model for pipeline execution."""
+
+    dataset_path: str = Field(..., description="Path to the podcast transcript JSON file")
+    output_folder: str | None = Field(None, description="Optional output folder path")
+
+    class Config:
+        json_schema_extra = {"example": {"dataset_path": "data/input/ep001_remote_work.json", "output_folder": "data/output"}}
+
+
+class PipelineResponse(BaseModel):
+    """Response model for pipeline execution."""
+
+    output_text: str
+    output_path: str | None = None
+    timestamp: str
 
 
 def stringify_response(response: Any) -> str:
@@ -61,39 +55,104 @@ async def run_pipeline(dataset_path: Path, settings: Settings) -> Any:
     return result
 
 
+@app.post("/run-pipeline", response_model=PipelineResponse)
+async def run_pipeline_endpoint(request: PipelineRequest) -> PipelineResponse:
+    """
+    Execute the podcast multi-agent pipeline.
+
+    Args:
+        request: Pipeline execution request with dataset path and optional output folder
+
+    Returns:
+        PipelineResponse with output text and metadata
+    """
+    dataset_path = Path(request.dataset_path)
+    if not dataset_path.exists():
+        raise HTTPException(status_code=404, detail=f"Dataset file {request.dataset_path} not found")
+
+    try:
+        settings = Settings.from_env()
+        response = await run_pipeline(dataset_path, settings)
+        output_text = stringify_response(response)
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = None
+
+        if request.output_folder:
+            output_folder = Path(request.output_folder)
+            output_file_path = output_folder / f"pipeline_output_{timestamp}.txt"
+            output_file_path.parent.mkdir(parents=True, exist_ok=True)
+            output_file_path.write_text(output_text, encoding="utf-8")
+            output_path = str(output_file_path)
+            logger.info("Persisted pipeline output to %s", output_path)
+
+        return PipelineResponse(output_text=output_text, output_path=output_path, timestamp=timestamp)
+    except Exception as e:
+        logger.exception("Pipeline execution failed")
+        raise HTTPException(status_code=500, detail=f"Pipeline execution failed: {str(e)}")
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy"}
+
+
 def main(argv: Sequence[str] | None = None) -> None:
-    parser = argparse.ArgumentParser(description="")
+    """CLI entry point for backward compatibility."""
+    parser = argparse.ArgumentParser(description="Run podcast pipeline via CLI or start API server")
+
+    parser.add_argument("--mode", choices=["cli", "api"], default="cli", help="Run mode: 'cli' for direct execution, 'api' to start FastAPI server")
 
     parser.add_argument(
         "--input-dataset",
         default="data/input/ep001_remote_work.json",
-        help="Input dataset",
+        help="Input dataset (CLI mode only)",
     )
 
     parser.add_argument(
         "--output-folder",
         default="data/output",
-        help="Output folder",
+        help="Output folder (CLI mode only)",
+    )
+
+    parser.add_argument(
+        "--host",
+        default="0.0.0.0",
+        help="API server host (API mode only)",
+    )
+
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="API server port (API mode only)",
     )
 
     args = parser.parse_args(argv)
 
-    dataset_path = Path(args.input_dataset)
-    if not dataset_path.exists():
-        raise FileNotFoundError(f"Dataset file {args.input_dataset} not found")
-    settings = Settings.from_env()
+    if args.mode == "api":
+        import uvicorn
 
-    response = asyncio.run(run_pipeline(dataset_path, settings))
-    output_text = stringify_response(response)
+        uvicorn.run(app, host=args.host, port=args.port)
+    else:
+        # CLI mode
+        dataset_path = Path(args.input_dataset)
+        if not dataset_path.exists():
+            raise FileNotFoundError(f"Dataset file {args.input_dataset} not found")
+        settings = Settings.from_env()
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = Path(args.output_folder) / f"pipeline_output_{timestamp}.txt"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(output_text, encoding="utf-8")
-    logger.info("Persisted pipeline output to %s", output_path)
+        response = asyncio.run(run_pipeline(dataset_path, settings))
+        output_text = stringify_response(response)
 
-    if output_text:
-        print(output_text)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = Path(args.output_folder) / f"pipeline_output_{timestamp}.txt"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(output_text, encoding="utf-8")
+        logger.info("Persisted pipeline output to %s", output_path)
+
+        if output_text:
+            logger.info(output_text)
 
 
 if __name__ == "__main__":
