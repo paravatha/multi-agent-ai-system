@@ -6,7 +6,8 @@ from textwrap import dedent
 
 from google.adk.agents import Agent, LlmAgent
 from google.adk.models.google_llm import Gemini
-from google.adk.tools import AgentTool, google_search
+from google.adk.tools.agent_tool import AgentTool
+from google.adk.tools.google_search_tool import google_search
 
 from config import Settings
 
@@ -54,7 +55,7 @@ class AgentFactory:
         return LlmAgent(
             name="summarizer_agent",
             model=Gemini(
-                model=self.settings.gemini_model_flash,
+                model=self.settings.gemini_2_0_flash_lite,
                 retry_options=self.settings.retry_options,
             ),
             instruction=instruction,
@@ -75,7 +76,7 @@ class AgentFactory:
         ).strip()
         return LlmAgent(
             name="key_insights_agent",
-            model=self.settings.gemini_model_flash,
+            model=self.settings.gemini_2_0_flash_lite,
             instruction=instruction,
             output_key="key_insights_agent_results",
         )
@@ -83,7 +84,7 @@ class AgentFactory:
     def _create_search_agent(self) -> Agent:
         return Agent(
             name="search_agent",
-            model=self.settings.gemini_model_flash,
+            model=self.settings.gemini_2_0_flash_lite,
             instruction="You specialize in crafting concise Google Search queries to support fact-checking requests.",
             tools=[google_search],
         )
@@ -103,7 +104,7 @@ class AgentFactory:
         ).strip()
         return LlmAgent(
             name="fact_checker_agent",
-            model=self.settings.gemini_model_pro,
+            model=self.settings.gemini_2_5_flash_lite,
             instruction=instruction,
             output_key="fact_checker_agent_results",
             tools=[

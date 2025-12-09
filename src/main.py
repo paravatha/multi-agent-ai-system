@@ -25,8 +25,7 @@ class PipelineRequest(BaseModel):
     dataset_path: str = Field(..., description="Path to the podcast transcript JSON file")
     output_folder: str | None = Field(None, description="Optional output folder path")
 
-    class Config:
-        json_schema_extra = {"example": {"dataset_path": "data/input/ep001_remote_work.json", "output_folder": "data/output"}}
+    model_config = {"json_schema_extra": {"example": {"dataset_path": "data/input/ep001_remote_work.json", "output_folder": "data/output"}}}
 
 
 class PipelineResponse(BaseModel):
@@ -40,11 +39,10 @@ class PipelineResponse(BaseModel):
 def stringify_response(response: Any) -> str:
     if response is None:
         return ""
-    for attr in ("output_text", "text", "content"):
-        value = getattr(response, attr, None)
-        if value is not None:
-            return str(value)
-    return str(response)
+    if response and hasattr(response[0], "content") and hasattr(response[0].content, "parts"):
+        text = response[0].content.parts[0].text
+        logger.info("Extracted Text: %s", text)
+    return str(text)
 
 
 async def run_pipeline(dataset_path: Path, settings: Settings) -> Any:
@@ -80,7 +78,7 @@ async def run_pipeline_endpoint(request: PipelineRequest) -> PipelineResponse:
 
         if request.output_folder:
             output_folder = Path(request.output_folder)
-            output_file_path = output_folder / f"pipeline_output_{timestamp}.txt"
+            output_file_path = output_folder / f"pipeline_output_{timestamp}.md"
             output_file_path.parent.mkdir(parents=True, exist_ok=True)
             output_file_path.write_text(output_text, encoding="utf-8")
             output_path = str(output_file_path)
@@ -146,7 +144,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         output_text = stringify_response(response)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_path = Path(args.output_folder) / f"pipeline_output_{timestamp}.txt"
+        output_path = Path(args.output_folder) / f"pipeline_output_{timestamp}.md"
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(output_text, encoding="utf-8")
         logger.info("Persisted pipeline output to %s", output_path)

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  podcast-pipeline-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: podcast-pipeline-api
+    ports:
+      - "8061:8061"
+    env_file:
+      - path: ./.env
+        required: true
+    volumes:
+      # Mount output directory for persistent storage
+      - ./data/output:/app/data/output
+      # Optional: mount input data if you want to update it without rebuilding
+      - ./data/input:/app/data/input
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8061/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
