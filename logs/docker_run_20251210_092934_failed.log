@@ -1,4 +1,4 @@
-time="2025-12-10T09:29:38-05:00" level=warning msg="/Users/pparava1/git-ws/learning/ai-ml/multi-agent-ai-system/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-12-10T09:29:38-05:00" level=warning msg="/Users/prasad/git-ws/learning/ai-ml/multi-agent-ai-system/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
 podcast-pipeline-api  | 2025-12-10 14:29:41,077 - __main__ - INFO - Starting FastAPI server on 0.0.0.0:8061
 podcast-pipeline-api  | INFO:     Started server process [1]
 podcast-pipeline-api  | INFO:     Waiting for application startup.
