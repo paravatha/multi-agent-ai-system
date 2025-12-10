@@ -9,4 +9,4 @@
 
 curl -X POST "http://localhost:8061/run-pipeline" \
   -H "Content-Type: application/json" \
-  -d '{"dataset_path": "data/input/ep003_bootstrapping.json", "output_folder": "data/output"}'
+  -d '{"dataset_path": "data/input/ep002_ai_healthcare.json", "output_folder": "data/output"}'

@@ -14,6 +14,7 @@
 - `src/main.py` — FastAPI app and CLI entry point for running the pipeline.
 - `scripts/app_run.sh` — Script to run the FastAPI server locally.
 - `scripts/docker_run.sh` — Script to build and run the application in a Docker container.
+- `scripts/invoke_api.sh` — Script to invoke API using curl
 
 ## Features
 
@@ -33,12 +34,7 @@
    ```
 
 2. **Set Environment Variables**:
-   Create a `.env` file in the root directory with the following variables:
-
-   ```env
-   GEMINI_MODEL_FLASH=your_gemini_flash_model
-   GEMINI_MODEL_PRO=your_gemini_pro_model
-   ```
+   Create a `.env` file in the root directory using `[env.sample]`
 
 3. **Install Dependencies**:
    Use `pip` to install the required dependencies:
@@ -84,7 +80,7 @@
    ./scripts/app_run.sh
    ```
 
-- This script runs the FastAPI server with default settings (`host=0.0.0.0`, `port=8000`).
+- This script runs the FastAPI server with default settings (`host=0.0.0.0`, `port=8060`).
 
 ### 4. **Run Using `scripts/docker_run.sh`**
 
@@ -94,11 +90,11 @@
    ./scripts/docker_run.sh
    ```
 
-- This script builds the Docker image and runs the container, exposing the FastAPI server on port `8000`.
+- This script builds the Docker image and runs the container, exposing the FastAPI server on port `8061`.
 - Example API request (after running the script):
 
      ```bash
-     curl -X POST "http://localhost:8000/run-pipeline" \
+     curl -X POST "http://localhost:8061/run-pipeline" \
        -H "Content-Type: application/json" \
        -d '{"dataset_path": "data/input/ep001_remote_work.json", "output_folder": "data/output"}'
      ```
@@ -112,11 +108,14 @@ Running the pipeline yields:
 - **Fact-Check Table**: A markdown table with verification status and confidence scores.
 - **Logs**: Detailed logs capturing pipeline steps for traceability.
 
+Outputs are stored in `data/output`
+
 ## Development
 
 ### Logging
 
-The application uses Python's `logging` module for detailed traceability. Logs include:
+The application uses Python's `logging` module for detailed traceability. Log files are saved in `logs` folder
+Logs include:
 
 - Pipeline initialization and execution steps.
 - Agent creation and execution details.
@@ -137,19 +136,23 @@ Place your dataset in the `data/input/` directory. Example:
 }
 ```
 
+Output will be saved in `data/output/` directory
+
 ## Next steps
+
+### Improvements
+
+- Split Agents in to multiple modules
+- Improve re-try logic
+- Improve failure handling: add request, response and error queues to the solution to make it more resilient
+- Integrate with `mlflow` to utilize `prompts` and `model` registry and agent evaluation features
+- Implement model routing: route requests to different models based on cost and complexity
+- Implement input schema validation and request/response content filtering
+- Add Unit tests
 
 ### Deployment strategy
 
 [Deployment.md](Deployment.md)
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Submit a pull request with a detailed description of your changes.
 
 ## License
 

@@ -1,0 +1,286 @@
+time="2025-12-10T09:29:38-05:00" level=warning msg="/Users/pparava1/git-ws/learning/ai-ml/multi-agent-ai-system/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+podcast-pipeline-api  | 2025-12-10 14:29:41,077 - __main__ - INFO - Starting FastAPI server on 0.0.0.0:8061
+podcast-pipeline-api  | INFO:     Started server process [1]
+podcast-pipeline-api  | INFO:     Waiting for application startup.
+podcast-pipeline-api  | INFO:     Application startup complete.
+podcast-pipeline-api  | INFO:     Uvicorn running on http://0.0.0.0:8061 (Press CTRL+C to quit)
+podcast-pipeline-api  | INFO:     127.0.0.1:57858 - "GET /health HTTP/1.1" 200 OK
+podcast-pipeline-api  | /app/src/main.py:84: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+podcast-pipeline-api  |   logger.info("Received pipeline execution request: %s", request.dict())
+podcast-pipeline-api  | 2025-12-10 14:29:45,311 - __main__ - INFO - Received pipeline execution request: {'dataset_path': 'data/input/ep002_ai_healthcare.json', 'output_folder': 'data/output'}
+podcast-pipeline-api  | 2025-12-10 14:29:45,317 - root - INFO - gemini_flash='gemini-2.5-flash'
+podcast-pipeline-api  | 2025-12-10 14:29:45,317 - root - INFO - gemini_flash_lite=  'gemini-2.5-flash'
+podcast-pipeline-api  | 2025-12-10 14:29:45,317 - root - INFO - RETRY_ATTEMPTS: 3
+podcast-pipeline-api  | 2025-12-10 14:29:45,320 - __main__ - INFO - Starting podcast agent pipeline for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:29:45,321 - TranscriptLoader - INFO - Successfully loaded transcript file: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:29:45,322 - AgentFactory - INFO - Building agent bundle for podcast workflow.
+podcast-pipeline-api  | 2025-12-10 14:29:45,324 - AgentFactory - INFO - Successfully initialized agent bundle.
+podcast-pipeline-api  | 2025-12-10 14:29:45,324 - PodcastAgentPipeline - INFO - Pipeline initialized successfully for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:29:45,324 - PodcastAgentPipeline - INFO - Starting pipeline execution for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  |
+podcast-pipeline-api  |  ### Created new session: debug_session_id
+podcast-pipeline-api  |
+podcast-pipeline-api  | User >
+podcast-pipeline-api  |                 - Generate a comprehensive analysis of the podcast episode data provided
+podcast-pipeline-api  |                 - Return the response in a human-readable format.
+podcast-pipeline-api  |
+podcast-pipeline-api  | 2025-12-10 14:29:45,447 - google_adk.google.adk.models.google_llm - INFO - Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+podcast-pipeline-api  | 2025-12-10 14:29:45,450 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+podcast-pipeline-api  | 2025-12-10 14:29:55,408 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+podcast-pipeline-api  | 2025-12-10 14:29:55,417 - google_genai._api_client - INFO - Retrying google.genai._api_client.BaseApiClient._async_request_once in 1.0064907168380328 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}.
+podcast-pipeline-api  | 2025-12-10 14:29:59,315 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+podcast-pipeline-api  | 2025-12-10 14:29:59,323 - google_genai._api_client - INFO - Retrying google.genai._api_client.BaseApiClient._async_request_once in 7.114139876642998 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}.
+podcast-pipeline-api  | 2025-12-10 14:30:08,527 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+podcast-pipeline-api  | 2025-12-10 14:30:08,534 - PodcastAgentPipeline - ERROR - Pipeline execution failed for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | Traceback (most recent call last):
+podcast-pipeline-api  |   File "/app/src/pipeline.py", line 53, in run
+podcast-pipeline-api  |     response = await runner.run_debug(self.build_prompt())
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 1135, in run_debug
+podcast-pipeline-api  |     async for event in self.run_async(
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 472, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 460, in _run_with_trace
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 689, in _exec_with_plugin
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 449, in execute
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 77, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 460, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 370, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 447, in _run_one_step_async
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 816, in _call_llm_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 800, in _call_llm_with_tracing
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1053, in _run_and_handle_error
+podcast-pipeline-api  |     raise model_error
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1039, in _run_and_handle_error
+podcast-pipeline-api  |     async for response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/models/google_llm.py", line 211, in generate_content_async
+podcast-pipeline-api  |     response = await self.api_client.aio.models.generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 7033, in generate_content
+podcast-pipeline-api  |     response = await self._generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 5839, in _generate_content
+podcast-pipeline-api  |     response = await self._api_client.async_request(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1434, in async_request
+podcast-pipeline-api  |     result = await self._async_request(
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1367, in _async_request
+podcast-pipeline-api  |     return await self._async_retry(  # type: ignore[no-any-return]
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+podcast-pipeline-api  |     do = await self.iter(retry_state=retry_state)
+podcast-pipeline-api  |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+podcast-pipeline-api  |     result = await action(retry_state)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/_utils.py", line 99, in inner
+podcast-pipeline-api  |     return call(*args, **kwargs)
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+podcast-pipeline-api  |     raise retry_exc.reraise()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+podcast-pipeline-api  |     raise self.last_attempt.result()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+podcast-pipeline-api  |     return self.__get_result()
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+podcast-pipeline-api  |     raise self._exception
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+podcast-pipeline-api  |     result = await fn(*args, **kwargs)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1347, in _async_request_once
+podcast-pipeline-api  |     await errors.APIError.raise_for_async_response(client_response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 188, in raise_for_async_response
+podcast-pipeline-api  |     await cls.raise_error_async(status_code, response_json, response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 212, in raise_error_async
+podcast-pipeline-api  |     raise ServerError(status_code, response_json, response)
+podcast-pipeline-api  | google.genai.errors.ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}
+podcast-pipeline-api  | 2025-12-10 14:30:08,542 - __main__ - ERROR - Error occurred while running the pipeline for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | Traceback (most recent call last):
+podcast-pipeline-api  |   File "/app/src/main.py", line 65, in run_pipeline
+podcast-pipeline-api  |     result = await pipeline.run()
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/app/src/pipeline.py", line 53, in run
+podcast-pipeline-api  |     response = await runner.run_debug(self.build_prompt())
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 1135, in run_debug
+podcast-pipeline-api  |     async for event in self.run_async(
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 472, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 460, in _run_with_trace
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 689, in _exec_with_plugin
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 449, in execute
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 77, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 460, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 370, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 447, in _run_one_step_async
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 816, in _call_llm_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 800, in _call_llm_with_tracing
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1053, in _run_and_handle_error
+podcast-pipeline-api  |     raise model_error
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1039, in _run_and_handle_error
+podcast-pipeline-api  |     async for response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/models/google_llm.py", line 211, in generate_content_async
+podcast-pipeline-api  |     response = await self.api_client.aio.models.generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 7033, in generate_content
+podcast-pipeline-api  |     response = await self._generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 5839, in _generate_content
+podcast-pipeline-api  |     response = await self._api_client.async_request(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1434, in async_request
+podcast-pipeline-api  |     result = await self._async_request(
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1367, in _async_request
+podcast-pipeline-api  |     return await self._async_retry(  # type: ignore[no-any-return]
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+podcast-pipeline-api  |     do = await self.iter(retry_state=retry_state)
+podcast-pipeline-api  |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+podcast-pipeline-api  |     result = await action(retry_state)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/_utils.py", line 99, in inner
+podcast-pipeline-api  |     return call(*args, **kwargs)
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+podcast-pipeline-api  |     raise retry_exc.reraise()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+podcast-pipeline-api  |     raise self.last_attempt.result()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+podcast-pipeline-api  |     return self.__get_result()
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+podcast-pipeline-api  |     raise self._exception
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+podcast-pipeline-api  |     result = await fn(*args, **kwargs)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1347, in _async_request_once
+podcast-pipeline-api  |     await errors.APIError.raise_for_async_response(client_response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 188, in raise_for_async_response
+podcast-pipeline-api  |     await cls.raise_error_async(status_code, response_json, response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 212, in raise_error_async
+podcast-pipeline-api  |     raise ServerError(status_code, response_json, response)
+podcast-pipeline-api  | google.genai.errors.ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}
+podcast-pipeline-api  | /app/src/main.py:110: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+podcast-pipeline-api  |   logger.exception("Pipeline execution failed for request: %s", request.dict())
+podcast-pipeline-api  | 2025-12-10 14:30:08,546 - __main__ - ERROR - Pipeline execution failed for request: {'dataset_path': 'data/input/ep002_ai_healthcare.json', 'output_folder': 'data/output'}
+podcast-pipeline-api  | Traceback (most recent call last):
+podcast-pipeline-api  |   File "/app/src/main.py", line 93, in run_pipeline_endpoint
+podcast-pipeline-api  |     response = await run_pipeline(dataset_path, settings)
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/app/src/main.py", line 65, in run_pipeline
+podcast-pipeline-api  |     result = await pipeline.run()
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/app/src/pipeline.py", line 53, in run
+podcast-pipeline-api  |     response = await runner.run_debug(self.build_prompt())
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 1135, in run_debug
+podcast-pipeline-api  |     async for event in self.run_async(
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 472, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 460, in _run_with_trace
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 689, in _exec_with_plugin
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/runners.py", line 449, in execute
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/sequential_agent.py", line 77, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/base_agent.py", line 294, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/agents/llm_agent.py", line 460, in _run_async_impl
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 370, in run_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 447, in _run_one_step_async
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 816, in _call_llm_async
+podcast-pipeline-api  |     async for event in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 800, in _call_llm_with_tracing
+podcast-pipeline-api  |     async for llm_response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1053, in _run_and_handle_error
+podcast-pipeline-api  |     raise model_error
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1039, in _run_and_handle_error
+podcast-pipeline-api  |     async for response in agen:
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/adk/models/google_llm.py", line 211, in generate_content_async
+podcast-pipeline-api  |     response = await self.api_client.aio.models.generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 7033, in generate_content
+podcast-pipeline-api  |     response = await self._generate_content(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/models.py", line 5839, in _generate_content
+podcast-pipeline-api  |     response = await self._api_client.async_request(
+podcast-pipeline-api  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1434, in async_request
+podcast-pipeline-api  |     result = await self._async_request(
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1367, in _async_request
+podcast-pipeline-api  |     return await self._async_retry(  # type: ignore[no-any-return]
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 111, in __call__
+podcast-pipeline-api  |     do = await self.iter(retry_state=retry_state)
+podcast-pipeline-api  |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 153, in iter
+podcast-pipeline-api  |     result = await action(retry_state)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/_utils.py", line 99, in inner
+podcast-pipeline-api  |     return call(*args, **kwargs)
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 420, in exc_check
+podcast-pipeline-api  |     raise retry_exc.reraise()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/__init__.py", line 187, in reraise
+podcast-pipeline-api  |     raise self.last_attempt.result()
+podcast-pipeline-api  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+podcast-pipeline-api  |     return self.__get_result()
+podcast-pipeline-api  |            ^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+podcast-pipeline-api  |     raise self._exception
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 114, in __call__
+podcast-pipeline-api  |     result = await fn(*args, **kwargs)
+podcast-pipeline-api  |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/_api_client.py", line 1347, in _async_request_once
+podcast-pipeline-api  |     await errors.APIError.raise_for_async_response(client_response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 188, in raise_for_async_response
+podcast-pipeline-api  |     await cls.raise_error_async(status_code, response_json, response)
+podcast-pipeline-api  |   File "/usr/local/lib/python3.12/site-packages/google/genai/errors.py", line 212, in raise_error_async
+podcast-pipeline-api  |     raise ServerError(status_code, response_json, response)
+podcast-pipeline-api  | google.genai.errors.ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}
+podcast-pipeline-api  | INFO:     192.168.65.1:64668 - "POST /run-pipeline HTTP/1.1" 500 Internal Server Error
+podcast-pipeline-api  | INFO:     127.0.0.1:37284 - "GET /health HTTP/1.1" 200 OK

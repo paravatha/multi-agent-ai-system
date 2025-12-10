@@ -213,3 +213,7 @@ temp/
 # data folders
 data/
 datasets/
+
+# Allow data and logs folders to be tracked
+!data/
+!logs/*.log
