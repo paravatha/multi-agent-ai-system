@@ -1,0 +1,115 @@
+time="2025-12-10T09:30:31-05:00" level=warning msg="/Users/pparava1/git-ws/learning/ai-ml/multi-agent-ai-system/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+podcast-pipeline-api  | 2025-12-10 14:30:33,653 - __main__ - INFO - Starting FastAPI server on 0.0.0.0:8061
+podcast-pipeline-api  | INFO:     Started server process [1]
+podcast-pipeline-api  | INFO:     Waiting for application startup.
+podcast-pipeline-api  | INFO:     Application startup complete.
+podcast-pipeline-api  | INFO:     Uvicorn running on http://0.0.0.0:8061 (Press CTRL+C to quit)
+podcast-pipeline-api  | INFO:     127.0.0.1:39698 - "GET /health HTTP/1.1" 200 OK
+podcast-pipeline-api  | /app/src/main.py:84: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+podcast-pipeline-api  |   logger.info("Received pipeline execution request: %s", request.dict())
+podcast-pipeline-api  | 2025-12-10 14:30:41,676 - __main__ - INFO - Received pipeline execution request: {'dataset_path': 'data/input/ep002_ai_healthcare.json', 'output_folder': 'data/output'}
+podcast-pipeline-api  | 2025-12-10 14:30:41,677 - root - INFO - gemini_flash='gemini-2.5-flash-lite'
+podcast-pipeline-api  | 2025-12-10 14:30:41,677 - root - INFO - gemini_flash_lite=  'gemini-2.5-flash-lite'
+podcast-pipeline-api  | 2025-12-10 14:30:41,677 - root - INFO - RETRY_ATTEMPTS: 3
+podcast-pipeline-api  | 2025-12-10 14:30:41,678 - __main__ - INFO - Starting podcast agent pipeline for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:30:41,679 - TranscriptLoader - INFO - Successfully loaded transcript file: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:30:41,680 - AgentFactory - INFO - Building agent bundle for podcast workflow.
+podcast-pipeline-api  | 2025-12-10 14:30:41,681 - AgentFactory - INFO - Successfully initialized agent bundle.
+podcast-pipeline-api  | 2025-12-10 14:30:41,681 - PodcastAgentPipeline - INFO - Pipeline initialized successfully for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:30:41,681 - PodcastAgentPipeline - INFO - Starting pipeline execution for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  |
+podcast-pipeline-api  |  ### Created new session: debug_session_id
+podcast-pipeline-api  |
+podcast-pipeline-api  | User >
+podcast-pipeline-api  |                 - Generate a comprehensive analysis of the podcast episode data provided
+podcast-pipeline-api  |                 - Return the response in a human-readable format.
+podcast-pipeline-api  |
+podcast-pipeline-api  | 2025-12-10 14:30:41,811 - google_adk.google.adk.models.google_llm - INFO - Sending out request, model: gemini-2.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+podcast-pipeline-api  | 2025-12-10 14:30:41,814 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+podcast-pipeline-api  | 2025-12-10 14:30:45,934 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+podcast-pipeline-api  | 2025-12-10 14:30:45,945 - google_adk.google.adk.models.google_llm - INFO - Response received from the model.
+podcast-pipeline-api  | summarizer_agent > ## Podcast Episode Analysis: AI in Healthcare: Hype or Reality?
+podcast-pipeline-api  |
+podcast-pipeline-api  | ### Core Themes
+podcast-pipeline-api  |
+podcast-pipeline-api  | The central theme of this podcast episode is the practical application and current reality of Artificial Intelligence (AI) within the healthcare sector, aiming to differentiate between the overblown hype and tangible use cases. Other significant themes include the regulatory landscape for AI in medicine, ethical considerations such as data privacy and bias, and the future trajectory of AI integration in healthcare.
+podcast-pipeline-api  |
+podcast-pipeline-api  | ### Key Discussions
+podcast-pipeline-api  |
+podcast-pipeline-api  | The discussion begins with host David Chen setting the stage to demystify AI in healthcare, joined by guests Dr. Priya Patel and Alex Moore. The conversation quickly delves into specific applications, particularly AI's role in diagnostics and triage. Dr. Patel explains that AI is currently used to assist clinicians, such as in reading X-rays or identifying urgent cases, but emphasizes that it's not intended to replace human medical professionals. Alex Moore highlights the significant regulatory hurdles, citing the FDA's careful review process, which prevents AI from operating autonomously in the near future.
+podcast-pipeline-api  |
+podcast-pipeline-api  | A concrete example of current AI use discussed is smart triage chatbots available on hospital websites and apps, designed to guide patients on the appropriate next steps before seeing a doctor. The conversation then shifts to major challenges, with Alex Moore pinpointing data privacy and algorithmic bias as critical concerns, stemming from AI's reliance on potentially skewed existing clinical data.
+podcast-pipeline-api  |
+podcast-pipeline-api  | Despite these challenges, the adoption of AI in healthcare continues. Dr. Patel attributes this to the pursuit of efficiency, faster diagnostic reads, and error reduction, while Alex Moore points to the COVID-19 pandemic as a catalyst for increased digital health adoption, which in turn has accelerated the integration of AI tools. Looking ahead, the guests discuss predictive diagnostics and AI "copilots" that can suggest treatment plans, with the caveat that human clinicians will always retain final decision-making authority. Interoperability between healthcare systems is identified as a crucial factor for AI to function effectively and securely in the future.
+podcast-pipeline-api  |
+podcast-pipeline-api  | ### Outcomes/Opinions Shared
+podcast-pipeline-api  |
+podcast-pipeline-api  | The overarching outcome of the episode is a balanced perspective on AI in healthcare. The consensus is that while AI offers significant potential for improving efficiency and supporting clinicians, its current implementation is assistive rather than revolutionary. Regulatory bodies like the FDA are playing a crucial role in ensuring safety, slowing down full autonomy. Ethical considerations, particularly data privacy and bias, remain significant challenges that need continuous attention. The episode concludes with a message of cautious optimism, suggesting that the future of AI in healthcare lies in its ability to augment human expertise and improve patient care, provided that interoperability and ethical guidelines are prioritized.
+podcast-pipeline-api  | 2025-12-10 14:30:45,967 - google_adk.google.adk.models.google_llm - INFO - Sending out request, model: gemini-2.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+podcast-pipeline-api  | 2025-12-10 14:30:45,967 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+podcast-pipeline-api  | 2025-12-10 14:30:50,409 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+podcast-pipeline-api  | 2025-12-10 14:30:50,416 - google_adk.google.adk.models.google_llm - INFO - Response received from the model.
+podcast-pipeline-api  | key_insights_agent > | Takeaways                                                                                                                                                                         | Quotes                                                                                                                                                                                                                                                          | Topics                                               |
+podcast-pipeline-api  | | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
+podcast-pipeline-api  | | AI in healthcare is currently more assistive than revolutionary, aiding clinicians rather than replacing them.                                                                       | "Yes. Some hospitals use AI for reading X-rays or flagging urgent cases. But it’s assistive, not replacing clinicians." (00:55)                                                                                                                                    | AI Applications, Diagnostics, Triage, Human Oversight |
+podcast-pipeline-api  | | Regulatory bodies, like the FDA, impose significant review processes, creating barriers to widespread autonomous AI deployment in healthcare.                                          | "And the regulatory barriers are huge. The FDA reviews these systems carefully, so full autonomy isn’t happening anytime soon." (01:15)                                                                                                                            | Regulation, FDA, Autonomy, Healthcare Technology     |
+podcast-pipeline-api  | | Practical AI applications patients might encounter include smart triage chatbots that help them determine next steps before seeing a doctor.                                         | "Smart triage chatbots on hospital websites or apps, helping patients figure out next steps before seeing a doctor." (01:50)                                                                                                                                      | Patient Experience, Chatbots, Triage, Digital Health |
+podcast-pipeline-api  | | Major challenges for AI in healthcare include data privacy and potential algorithmic bias, as AI systems learn from existing, potentially skewed, clinical data.                    | "Data privacy and bias are major hurdles. AI learns from existing clinical data, which may be skewed." (02:20)                                                                                                                                                    | Data Privacy, Bias, Ethics, Data Quality             |
+podcast-pipeline-api  | | The adoption of AI in healthcare is driven by the pursuit of efficiency, clinician support, and was accelerated by the broader adoption of digital health tools, especially post-pandemic. | "Efficiency and clinician support. Hospitals want faster reads and fewer errors." (03:05) AND "Plus, the pandemic accelerated digital health adoption, including AI tools." (03:30)                                                                                   | Adoption Drivers, Efficiency, Digital Health, Pandemic |
+podcast-pipeline-api  | | The future of AI in healthcare involves "copilots" for treatment suggestions and enhanced predictive diagnostics, but human clinicians will always make the final decisions.         | "Yes, AI copilots that suggest treatment plans, but a human will always make the final call." (04:15)                                                                                                                                                                | Future Trends, AI Copilots, Predictive Analytics     |
+podcast-pipeline-api  | | Interoperability, ensuring different healthcare systems can securely communicate and share data, is a critical factor for AI to function effectively in the future.               | "Interoperability is key. AI will work best when systems talk to each other securely." (04:40)                                                                                                                                                                    | Interoperability, Data Security, System Integration  |
+podcast-pipeline-api  | 2025-12-10 14:30:50,442 - google_adk.google.adk.models.google_llm - INFO - Sending out request, model: gemini-2.5-flash-lite, backend: GoogleLLMVariant.GEMINI_API, stream: False
+podcast-pipeline-api  | 2025-12-10 14:30:54,867 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+podcast-pipeline-api  | 2025-12-10 14:30:54,872 - google_adk.google.adk.models.google_llm - INFO - Response received from the model.
+podcast-pipeline-api  | fact_checker_agent > The podcast episode "AI in Healthcare: Hype or Reality?" explores the current state and future potential of artificial intelligence in the healthcare sector. Here's an analysis of the provided summarization and key insights:
+podcast-pipeline-api  |
+podcast-pipeline-api  | **Overall Theme:** The episode aims to provide a realistic perspective on AI in healthcare, distinguishing between its practical applications and the often-exaggerated hype. It emphasizes that AI is currently an assistive tool rather than a replacement for human medical professionals.
+podcast-pipeline-api  |
+podcast-pipeline-api  | **Key Discussions and Insights:**
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **AI as an Assistant:**
+podcast-pipeline-api  |     *   **Claim:** AI is currently used to assist clinicians in tasks like reading X-rays and identifying urgent cases, but it does not replace them.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. Multiple sources confirm AI's role as a supportive tool in medical diagnostics and triage. For example, research papers and industry reports highlight AI's use in image analysis (radiology, pathology) and early detection of critical conditions.
+podcast-pipeline-api  |     *   **Confidence:** 0.95
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Regulatory Hurdles:**
+podcast-pipeline-api  |     *   **Claim:** Regulatory bodies like the FDA have strict review processes, which are a significant barrier to the widespread deployment of autonomous AI in healthcare.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. The FDA has been actively developing frameworks for AI/ML-based medical devices, emphasizing safety and efficacy, which inherently slows down the approval of autonomous systems.
+podcast-pipeline-api  |     *   **Confidence:** 0.93
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Patient-Facing AI:**
+podcast-pipeline-api  |     *   **Claim:** Patients may encounter AI through smart triage chatbots on hospital websites or apps that help them determine the appropriate next steps for their care.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. Many healthcare providers have implemented AI-powered chatbots for initial patient assessment and guidance.
+podcast-pipeline-api  |     *   **Confidence:** 0.90
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Challenges: Data Privacy and Bias:**
+podcast-pipeline-api  |     *   **Claim:** Major challenges for AI in healthcare include data privacy concerns and the risk of algorithmic bias, stemming from AI's reliance on existing, potentially skewed, clinical data.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. Data privacy (HIPAA compliance, etc.) and algorithmic bias are widely recognized as critical ethical and technical challenges in healthcare AI. Studies have shown how bias in training data can lead to disparities in AI performance across different demographic groups.
+podcast-pipeline-api  |     *   **Confidence:** 0.97
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Drivers of Adoption:**
+podcast-pipeline-api  |     *   **Claim:** The adoption of AI in healthcare is driven by the pursuit of efficiency, support for clinicians, and was accelerated by the broader adoption of digital health tools, especially post-pandemic.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. The need for improved efficiency, reduced errors, and the digital transformation spurred by COVID-19 have indeed been key drivers for AI integration in healthcare.
+podcast-pipeline-api  |     *   **Confidence:** 0.94
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Future of AI in Healthcare:**
+podcast-pipeline-api  |     *   **Claim:** The future involves AI "copilots" that suggest treatment plans and enhanced predictive diagnostics, but human clinicians will retain final decision-making authority.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. Concepts like AI-assisted decision support and predictive analytics are active areas of research and development, with a consistent emphasis on maintaining human oversight.
+podcast-pipeline-api  |     *   **Confidence:** 0.92
+podcast-pipeline-api  |
+podcast-pipeline-api  | *   **Interoperability:**
+podcast-pipeline-api  |     *   **Claim:** Interoperability between healthcare systems is crucial for AI to function effectively and securely in the future.
+podcast-pipeline-api  |     *   **Verification:** ✅ Verified true. The ability of different healthcare IT systems to exchange and interpret data is a fundamental requirement for seamless AI integration and operation.
+podcast-pipeline-api  |     *   **Confidence:** 0.96
+podcast-pipeline-api  |
+podcast-pipeline-api  | **Conclusion:**
+podcast-pipeline-api  |
+podcast-pipeline-api  | The podcast provides a well-rounded and realistic view of AI in healthcare. The consensus is that while AI holds immense promise for improving healthcare efficiency and supporting clinicians, its current role is primarily assistive. Significant regulatory, ethical (privacy, bias), and technical (interoperability) challenges need to be addressed for AI to reach its full potential. The future points towards AI augmenting human expertise, with human clinicians always at the helm of decision-making.
+podcast-pipeline-api  | 2025-12-10 14:30:54,874 - PodcastAgentPipeline - INFO - podcast_agent_pipeline execution completed successfully.
+podcast-pipeline-api  | 2025-12-10 14:30:54,875 - __main__ - INFO - Pipeline execution completed successfully for dataset: data/input/ep002_ai_healthcare.json
+podcast-pipeline-api  | 2025-12-10 14:30:54,880 - __main__ - INFO - Persisted pipeline output to: data/output/pipeline_output_20251210_143054.md
+podcast-pipeline-api  | 2025-12-10 14:30:54,880 - __main__ - INFO - Pipeline execution completed successfully.
+podcast-pipeline-api  | INFO:     192.168.65.1:64240 - "POST /run-pipeline HTTP/1.1" 200 OK
+podcast-pipeline-api  | INFO:     127.0.0.1:57060 - "GET /health HTTP/1.1" 200 OK
+podcast-pipeline-api  | INFO:     127.0.0.1:57160 - "GET /health HTTP/1.1" 200 OK
+podcast-pipeline-api  | INFO:     127.0.0.1:35200 - "GET /health HTTP/1.1" 200 OK
