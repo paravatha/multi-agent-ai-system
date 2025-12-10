@@ -32,8 +32,8 @@ def retry_config(attempts: int = 2) -> types.HttpRetryOptions:
 
 @dataclass(slots=True)
 class Settings:
-    gemini_2_0_flash_lite: str
-    gemini_2_5_flash_lite: str
+    gemini_flash: str
+    gemini_flash_lite: str
     retry_attempts: int
     retry_options: types.HttpRetryOptions
 
@@ -44,10 +44,10 @@ class Settings:
         else:
             load_dotenv()
 
-        gemini_flash_2_0_lite = os.getenv("GEMINI_2.0_FLASH_LITE")
-        logging.info(f"{gemini_flash_2_0_lite=}")
-        gemini_flash_2_5_lite = os.getenv("GEMINI_2.5_FLASH_LITE")
-        logging.info(f"{gemini_flash_2_5_lite=  }")
+        gemini_flash = os.getenv("GEMINI_FLASH")
+        logging.info(f"{gemini_flash=}")
+        gemini_flash_lite = os.getenv("GEMINI_FLASH_LITE")
+        logging.info(f"{gemini_flash_lite=  }")
         attempts_raw = os.getenv("RETRY_ATTEMPTS", "3")
         try:
             attempts = max(1, int(attempts_raw))
@@ -58,19 +58,19 @@ class Settings:
         missing = [
             name
             for name, value in (
-                ("GEMINI_2.0_FLASH_LITE", gemini_flash_2_0_lite),
-                ("GEMINI_2.5_FLASH_LITE", gemini_flash_2_5_lite),
+                ("GEMINI_FLASH", gemini_flash),
+                ("GEMINI_FLASH_LITE", gemini_flash_lite),
             )
             if not value
         ]
         if missing:
             raise RuntimeError(f"Missing required environment variables: {', '.join(missing)}")
         # Type assertion for mypy and static checkers
-        assert gemini_flash_2_0_lite is not None
-        assert gemini_flash_2_5_lite is not None
+        assert gemini_flash is not None
+        assert gemini_flash_lite is not None
         return cls(
-            gemini_2_0_flash_lite=gemini_flash_2_0_lite,
-            gemini_2_5_flash_lite=gemini_flash_2_5_lite,
+            gemini_flash=gemini_flash,
+            gemini_flash_lite=gemini_flash_lite,
             retry_attempts=attempts,
             retry_options=retry_config(attempts),
         )
